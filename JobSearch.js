@@ -37,7 +37,7 @@ if(event == 'HTTP_REQUEST'){
             Flow.store.jobSearch = searchDoor
         
         }
-        
+        //works but needs to be updated due to Monsters new SSL cert
         /*else if(HTTP.uri.indexOf('/search/') > -1){
              log('made it to monster')
             var monsterJob = /q=((([A-Za-z]+)\%?([0-9]+)?)+)/.exec(HTTP.query)
@@ -78,13 +78,16 @@ if(event == 'HTTP_REQUEST'){
 
 
 if(event == 'HTTP_RESPONSE') {
+
+//this application has already been commited from the ExtraHOp bundle Cloud Apps.
+//highly recomend downloading it. 
 application = 'CloudApps'
 client_floor = Flow.client.ipaddr.mask(24)
 jobSearch = Flow.store.jobSearch
 
 if(jobSearch != null){
     Application(application).metricAddDetailCount('Overall_Jobs_Searched',jobSearch, 1)
-    
+ //this is for break out of different campuses   
  switch(client_floor.toString()) {
     case '10.128.10.0' || '10.128.11.0':
        //log('case works' + client_floor);
